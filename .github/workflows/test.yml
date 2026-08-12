@@ -8,7 +8,9 @@ on:
   push:
     branches:
       - development
-
+  pull_request:
+    branches:
+      - development
 jobs:
   pytest:
     # GitHub Actions の実行環境
@@ -40,4 +42,4 @@ jobs:
       # テストを実行
       - name: Run tests
         run: |
-          xvfb-run -a pytest -v
+          PYTHONPATH=. xvfb-run -a pytest -v tests

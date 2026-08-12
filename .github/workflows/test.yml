@@ -1,0 +1,43 @@
+# ワークフロー名
+name: test
+
+# 実行タイミング
+on:
+  # development ブランチに push されたとき実行
+  # feature -> development のマージ後もここで検知される
+  push:
+    branches:
+      - development
+
+jobs:
+  pytest:
+    # GitHub Actions の実行環境
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリの内容を取得
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Python をセットアップ
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Tkinter と仮想ディスプレイをインストール
+      - name: Install Tkinter dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-tk xvfb
+
+      # requirements.txt からライブラリをインストール
+      - name: Install Python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # テストを実行
+      - name: Run tests
+        run: |
+          xvfb-run -a pytest -v

@@ -1,4 +1,11 @@
+# Python
 __pycache__/
 *.pyc
-.vscode/
+*.pyo
+*.pyd
+
+# Test
 .pytest_cache/
+
+# VSCode
+.vscode/

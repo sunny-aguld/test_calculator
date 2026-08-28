@@ -28,7 +28,7 @@ jobs:
       - name: Create branch
         shell: powershell
         run: |
-          git switch -c feature/issue-${{ github.event.issue.number }}
+          git switch -C feature/issue-${{ github.event.issue.number }}
 
       - name: Run Codex
         shell: powershell

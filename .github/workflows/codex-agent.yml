@@ -33,31 +33,30 @@ jobs:
       - name: Run Codex
         shell: powershell
         env:
-          GH_TOKEN: ${{ github.token }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
         run: |
           $prompt = @"
           GitHub Issue #$env:ISSUE_NUMBER を実装してください。
-
+        
           タイトル:
           $env:ISSUE_TITLE
-
+          
           内容:
           $env:ISSUE_BODY
-
+          
           要求:
           - リポジトリを調査する
           - Issueの要求を実装する
           - 必要に応じてテストを追加・修正する
           - pytestを実行する
           - 問題があれば修正する
-
+          
           Git操作は行わず、コード変更とテストまで実施してください。
           "@
-
-          codex exec --sandbox workspace-write $prompt
+          
+          $prompt | codex exec --sandbox workspace-write -
 
       - name: Run tests
         shell: powershell

@@ -1,5 +1,7 @@
 import tkinter as tk
 from APP.add import add
+from APP.sub import sub
+
 def create_main_window()-> tk.Tk:
     # -----------------------------------------------------
     # メインウィンドウ
@@ -44,7 +46,7 @@ def create_main_window()-> tk.Tk:
     button_add = tk.Button(frame_main, text="加算", width=8, command=lambda: calculate_add(entry_input1, entry_input2, entry_result))
     button_add.grid(row=2, column=0, padx=5, pady=10)
     
-    button_subtract = tk.Button(frame_main, text="減算", width=8)
+    button_subtract = tk.Button(frame_main, text="減算", width=8, command=lambda: calculate_subtract(entry_input1, entry_input2, entry_result))
     button_subtract.grid(row=2, column=1, padx=5, pady=10)
     
     button_mul = tk.Button(frame_main, text="乗算", width=8)
@@ -57,6 +59,10 @@ def create_main_window()-> tk.Tk:
 
 def calculate_add(entry_input1, entry_input2, entry_result):
     result = add(float(entry_input1.get()), float(entry_input2.get()))
+    update_result(entry_result, result)
+
+def calculate_subtract(entry_input1, entry_input2, entry_result):
+    result = sub(float(entry_input1.get()), float(entry_input2.get()))
     update_result(entry_result, result)
 
 def update_result(entry_widget, result):

@@ -36,7 +36,13 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
+        
         run: |
+          $utf8 = New-Object System.Text.UTF8Encoding($false)
+          $OutputEncoding = $utf8
+          [Console]::InputEncoding = $utf8
+          [Console]::OutputEncoding = $utf8
+        
           $prompt = @"
           GitHub Issue #$env:ISSUE_NUMBER を実装してください。
         

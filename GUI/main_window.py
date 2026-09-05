@@ -2,6 +2,7 @@ import tkinter as tk
 from APP.add import add
 from APP.sub import sub
 from APP.mul import mul
+from APP.dev import dev
 
 def create_main_window()-> tk.Tk:
     # -----------------------------------------------------
@@ -53,7 +54,7 @@ def create_main_window()-> tk.Tk:
     button_mul = tk.Button(frame_main, text="乗算", width=8, command=lambda: calculate_multiply(entry_input1, entry_input2, entry_result))
     button_mul.grid(row=2, column=2, padx=5, pady=10)
     
-    button_dev = tk.Button(frame_main, text="除算", width=8)
+    button_dev = tk.Button(frame_main, text="除算", width=8, command=lambda: calculate_division(entry_input1, entry_input2, entry_result)))
     button_dev.grid(row=2, column=3, padx=5, pady=10)
 
     return root
@@ -68,6 +69,10 @@ def calculate_subtract(entry_input1, entry_input2, entry_result):
 
 def calculate_multiply(entry_input1, entry_input2, entry_result):
     result = mul(float(entry_input1.get()), float(entry_input2.get()))
+    update_result(entry_result, result)
+
+def calculate_division(entry_input1, entry_input2, entry_result):
+    result = dev(float(entry_input1.get()), float(entry_input2.get()))
     update_result(entry_result, result)
 
 def update_result(entry_widget, result):
